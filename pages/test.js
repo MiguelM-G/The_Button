@@ -1,5 +1,4 @@
 import React from 'react'
-import Switches from '../Classes/Switches'
 
 const test = () => {
 return (
