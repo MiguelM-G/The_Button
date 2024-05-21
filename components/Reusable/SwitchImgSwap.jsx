@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState } from "react";
 
 // SwitchImgSwap acts as a reusable way to swap between 2 images as the background for a button
 
@@ -6,19 +6,30 @@ import React, { useState } from 'react'
 
 // the parent <button> tag is set up to resize with the respecive img being rendered at that time
 
-const SwitchImgSwap = ({srcOn, altOn, classNameOn, srcOff, altOff, classNameOff}) => {
-
+const SwitchImgSwap = ({
+  imgSwitchOff,
+  altSwitchOff,
+  imgSwitchOn,
+  altSwitchOn,
+  classNameButton,
+  classNameImgSwitchOff,
+  classNameImgSwitchOn,
+  ClickFunction,
+}) => {
   const [button, setButton] = useState(false);
   const pressButton = () => {
     setButton(!button);
-  }
+  };
 
   return (
-    <button className='w-auto h-auto' onClick={pressButton}>
-      {button ? <img src={srcOn} alt={altOn} className={classNameOn} /> :
-      <img src={srcOff} alt={altOff} className={classNameOff} />}
+    <button className={classNameButton} onClick={() => { pressButton(); ClickFunction(); }}>
+      {button ? (
+        <img src={imgSwitchOn} alt={altSwitchOn} className={classNameImgSwitchOn} />
+      ) : (
+        <img src={imgSwitchOff} alt={altSwitchOff} className={classNameImgSwitchOff} />
+      )}
     </button>
-  )
-}
+  );
+};
 
-export default SwitchImgSwap
+export default SwitchImgSwap;

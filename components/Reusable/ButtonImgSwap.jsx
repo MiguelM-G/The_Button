@@ -1,6 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 
-const ButtonImgSwap = ({ srcOn, altOn, classNameOn, srcOff, altOff, classNameOff, classNameButton }) => {
+const ButtonImgSwap = ({
+  imgNoPress,
+  altNoPress,
+  imgPress,
+  altPress,
+  classNameButton,
+  classNameImgNoPress,
+  classNameImgPress,
+  ClickFunction
+}) => {
   const [button, setButton] = useState(false);
 
   const handleMouseDown = () => {
@@ -13,11 +22,11 @@ const ButtonImgSwap = ({ srcOn, altOn, classNameOn, srcOff, altOff, classNameOff
 
   useEffect(() => {
     let timeoutId;
-    
+
     if (button === true) {
       timeoutId = setTimeout(() => {
         setButton(false);
-      }, 2000); // Set timeout for 2 seconds
+      }, 1000); // Set timeout for 2 seconds
     } else {
       clearTimeout(timeoutId); // Clear timeout if button is pressed again
     }
@@ -26,11 +35,16 @@ const ButtonImgSwap = ({ srcOn, altOn, classNameOn, srcOff, altOff, classNameOff
   }, [button]);
 
   return (
-    <button className={classNameButton} onMouseDown={handleMouseDown} onMouseUp={handleMouseUp}>
+    <button
+      className={classNameButton}
+      onMouseDown={handleMouseDown}
+      onMouseUp={handleMouseUp}
+      onClick={ClickFunction}
+    >
       {button ? (
-        <img src={srcOn} alt={altOn} className={classNameOn} />
+        <img src={imgPress} alt={altNoPress} className={classNameImgPress} />
       ) : (
-        <img src={srcOff} alt={altOff} className={classNameOff} />
+        <img src={imgNoPress} alt={altPress} className={classNameImgNoPress} />
       )}
     </button>
   );
